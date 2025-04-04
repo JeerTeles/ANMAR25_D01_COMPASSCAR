@@ -8,8 +8,16 @@ Essa API deve cadastrar, buscar, atualizar e excluir carros, bem como fazer as d
 ## Tecnologias Ultilizadas
 
 * Node.js
+* cors
+* dotenv
+* express
+* sequelize
 
 ## Pré-requisitos
 
-* Node.js instalado
+* Usar JavaScript como como linguagem pricipal.
+* Utilizar o framework Express.js. 
+* Node.js instalado.
+* Usar Mysql como sistema de gerenciamento de banco de dados.
+
 
