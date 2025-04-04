@@ -1,4 +1,4 @@
-require('dotenv').config();// esta importando a biblioteca /
+require('dotenv').config();// is importing the library /
 
 module.exports = {
   development: {

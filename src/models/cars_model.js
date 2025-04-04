@@ -1,28 +1,38 @@
-const Sequelize = require('sequelize');
-const sequelize = require('../connection'); // Importe a conexão
+const { DataTypes } = require('sequelize');
+const sequelize = require('../config/database');
 
-const Car = sequelize.define('car', {
+const Car = sequelize.define('Car', {
+  id: {
+    type: DataTypes.INTEGER,
+    primaryKey: true,
+    autoIncrement: true,
+  },
   brand: {
-    type: Sequelize.STRING,
-    allowNull: false
+    type: DataTypes.STRING,
+    allowNull: false,
   },
   model: {
-    type: Sequelize.STRING,
-    allowNull: false
+    type: DataTypes.STRING,
+    allowNull: false,
   },
   plate: {
-    type: Sequelize.STRING,
+    type: DataTypes.STRING,
+    allowNull: false,
     unique: true,
-    allowNull: false
   },
   year: {
-    type: Sequelize.INTEGER,
-    allowNull: false
+    type: DataTypes.INTEGER,
+    allowNull: false,
   },
   createdAt: {
-    type: Sequelize.DATE,
-    defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
-  }
+    type: DataTypes.DATE,
+    defaultValue: DataTypes.NOW,
+  },
+  updatedAt: {
+    type: DataTypes.DATE,
+    defaultValue: DataTypes.NOW,
+    onUpdate: 'CASCADE',
+  },
 });
 
 module.exports = Car;
