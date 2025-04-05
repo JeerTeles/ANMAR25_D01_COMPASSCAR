@@ -31,7 +31,7 @@ const CarItem = sequelize.define('CarItem', {
   },
 });
 
-// Define the association (one-to-many: one Car can have many CarItems)
+
 Car.hasMany(CarItem, { foreignKey: 'carId' });
 CarItem.belongsTo(Car, { foreignKey: 'carId' });
 
