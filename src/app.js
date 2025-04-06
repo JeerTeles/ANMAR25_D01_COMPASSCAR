@@ -1,3 +1,13 @@
 const express = require('express');
-const app = express(); // Cria uma instância do aplicativo Express
-const port = 3000;    // Define a porta em que o servidor irá escutar
+const cors = require('cors');
+const carRoutes = require('./routes/car.routes');
+
+const app = express();
+
+
+app.use(cors());
+app.use(express.json());
+
+app.use('/api', carRoutes);
+
+module.exports = app;

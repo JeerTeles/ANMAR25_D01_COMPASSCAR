@@ -1,5 +1,6 @@
 require('dotenv').config();// is importing the library /
 
+
 module.exports = {
   development: {
     username: process.env.DB_USER,
