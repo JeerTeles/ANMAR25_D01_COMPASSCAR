@@ -4,13 +4,13 @@ const carRoutes = require('./routes/car.routes');
 
 const app = express();
 
-
 app.use(cors());
 app.use(express.json());
 
-//Rota para a raiz da aplicação
+
+let {readFile} = require('fs');
 app.get('/', (req, res) => {
-    res.send('Bem-vindo à API Compass Car!');
+    res.send('Welcome to the Compass Car API!');
 });
 
 app.use('/api', carRoutes);

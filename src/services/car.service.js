@@ -27,6 +27,15 @@ async function createCar(carData) {
     throw new Error(errorMessage);
   }
 
+  /* Verificação de intervalo de ano */
+  const currentYear = new Date().getFullYear();
+  const nextYear = currentYear + 1;
+  const minYear = nextYear - 10;
+
+  if (carData.year < minYear || carData.year > nextYear) {
+    throw new Error(`Only cars between ${minYear} and ${currentYear} are allowed.`);
+  }
+
   const existingCar = await Car.findOne({ where: { plate: carData.plate } });
   if (existingCar) {
     throw new Error('Car already registered.');
@@ -37,7 +46,18 @@ async function createCar(carData) {
 async function updateCar(id, carData) {
   const car = await Car.findByPk(id);
   if (!car) {
-    throw new Error(`Carro com ID ${id} não encontrado.`);
+    throw new Error(`Car with ID ${id} not found.`);
+  }
+
+  /* Verificação de intervalo de ano (caso tentem alterar o ano) */
+  if (carData.year) {
+    const currentYear = new Date().getFullYear();
+    const nextYear = currentYear + 1;
+    const minYear = nextYear - 10;
+
+    if (carData.year < minYear || carData.year > nextYear) {
+      throw new Error(`Only cars between ${minYear} and ${currentYear} are allowed.`);
+    }
   }
 
   if (carData.plate && carData.plate !== car.plate) {
@@ -53,7 +73,7 @@ async function updateCar(id, carData) {
 async function deleteCar(id) {
   const car = await Car.findByPk(id);
   if (!car) {
-    return false; // Throw new Erro (Carro com ID ${id} não encontrado)
+    return false;
   }
   const deletedRows = await Car.destroy({ where: { id } });
   return deletedRows > 0;
