@@ -12,7 +12,7 @@ const CarItem = sequelize.define('CarItem', {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  carId: {
+  car_id: {
     type: DataTypes.INTEGER,
     allowNull: false,
     references: {

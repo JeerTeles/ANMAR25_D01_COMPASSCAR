@@ -9,13 +9,27 @@ async function getCarById(id) {
 }
 
 async function createCar(carData) {
-  // Basic validations /
   if (!carData.brand || !carData.model || !carData.plate || !carData.year) {
-    throw new Error('Missing required car information.');
+    let errorMessage = '';
+    if (!carData.brand) {
+      errorMessage += 'brand is required - ';
+    }
+    if (!carData.model) {
+      errorMessage += 'model is required - ';
+    }
+    if (!carData.year) {
+      errorMessage += 'year is required - ';
+    }
+    if (!carData.plate) {
+      errorMessage += 'plate is required - ';
+    }
+
+    throw new Error(errorMessage);
   }
+
   const existingCar = await Car.findOne({ where: { plate: carData.plate } });
   if (existingCar) {
-    throw new Error('Car with this plate already exists.');
+    throw new Error('Car already registered.');
   }
   return await Car.create(carData);
 }
@@ -25,7 +39,7 @@ async function updateCar(id, carData) {
   if (!car) {
     throw new Error(`Carro com ID ${id} não encontrado.`);
   }
-  
+
   if (carData.plate && carData.plate !== car.plate) {
     const existingCar = await Car.findOne({ where: { plate: carData.plate } });
     if (existingCar) {
@@ -33,7 +47,7 @@ async function updateCar(id, carData) {
     }
   }
   await Car.update(carData, { where: { id } });
-  return await Car.findByPk(id); 
+  return await Car.findByPk(id);
 }
 
 async function deleteCar(id) {
