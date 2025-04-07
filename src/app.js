@@ -8,11 +8,12 @@ app.use(cors());
 app.use(express.json());
 
 
-let {readFile} = require('fs');
 app.get('/', (req, res) => {
     res.send('Welcome to the Compass Car API!');
 });
 
-app.use('/api', carRoutes);
+
+app.use('/api/v1/cars', carRoutes);
+
 
 module.exports = app;

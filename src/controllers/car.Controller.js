@@ -51,7 +51,7 @@ async function deleteCar(req, res) {
   try {
     const deleted = await carService.deleteCar(id);
     if (deleted) {
-      res.status(204).send(); // No content for successful deletion
+      res.status(204).send();
     } else {
       res.status(404).json({ message: 'Car not found.' });
     }
@@ -60,10 +60,25 @@ async function deleteCar(req, res) {
   }
 }
 
+/* atualizações caritems */
+async function updateCarItems(req, res) {
+  const { id } = req.params;
+  const items = req.body;
+
+  try {
+    const result = await carService.updateCarItems(id, items);
+    res.status(200).json(result);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+}
+
+
 module.exports = {
   getAllCars,
   getCarById,
   createCar,
   updateCar,
   deleteCar,
+  updateCarItems, 
 };

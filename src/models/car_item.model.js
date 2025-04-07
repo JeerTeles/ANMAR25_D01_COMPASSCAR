@@ -1,4 +1,4 @@
-const { DataTypes } = require('sequelize'); // import object relational mapper  for node.js / { DataTypes }: Esta é uma sintaxe de desestruturação do JavaScrip /
+const { DataTypes } = require('sequelize'); 
 const sequelize = require('../config/database');
 const Car = require('./car.model'); 
 
@@ -32,7 +32,7 @@ const CarItem = sequelize.define('CarItem', {
 });
 
 
-Car.hasMany(CarItem, { foreignKey: 'carId' });
-CarItem.belongsTo(Car, { foreignKey: 'carId' });
+Car.hasMany(CarItem, { foreignKey: 'car_Id' });
+CarItem.belongsTo(Car, { foreignKey: 'car_Id' });
 
 module.exports = CarItem;
